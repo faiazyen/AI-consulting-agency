@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, Suspense } from "react";
+import { RotateCTA, RotateOutline } from "@/components/ui/button-rotate";
 import * as THREE from "three";
 
 export function GenerativeArtScene() {
@@ -194,15 +195,15 @@ export function AnomalousMatterHero({
       /* -mt-[72px] pulls the hero up behind the sticky header so the
          sphere truly fills 100vh from the very top of the viewport.
          pt-[72px] prevents content from being hidden under the header. */
-      className="relative -mt-[72px] h-screen w-full overflow-hidden bg-[#020203]"
+      className="relative -mt-[72px] h-screen w-full overflow-hidden bg-background"
     >
       {/* 3D canvas — fills entire section */}
-      <Suspense fallback={<div className="absolute inset-0 bg-[#020203]" />}>
+      <Suspense fallback={<div className="absolute inset-0 bg-background" />}>
         <GenerativeArtScene />
       </Suspense>
 
       {/* Gradient: strong fade from bottom so text is always readable */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#020203] via-[#020203]/50 to-transparent" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-background via-background/50 to-transparent" />
 
       {/* Content — absolutely pinned to the bottom of the section */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex flex-col items-center pb-16 text-center md:pb-24">
@@ -226,26 +227,19 @@ export function AnomalousMatterHero({
           {(ctaPrimary || ctaSecondary) && (
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               {ctaPrimary && (
-                <a
+                <RotateCTA
                   href={ctaPrimary.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-glow inline-flex items-center rounded-full bg-[var(--mq-accent)] px-8 py-3 text-sm font-semibold text-white transition-all hover:bg-[var(--mq-accent)]/90"
+                  className="btn-glow"
                 >
                   {ctaPrimary.label}
-                </a>
+                </RotateCTA>
               )}
               {ctaSecondary && (
-                <a
-                  href={ctaSecondary.href}
-                  className="inline-flex items-center rounded-full border border-[var(--mq-border)] px-8 py-3 text-sm font-medium text-[var(--mq-text)] transition-colors hover:bg-[var(--mq-glass-light)]"
-                >
-                  {ctaSecondary.href.startsWith("http") ? (
-                    ctaSecondary.label
-                  ) : (
-                    ctaSecondary.label
-                  )}
-                </a>
+                <RotateOutline href={ctaSecondary.href}>
+                  {ctaSecondary.label}
+                </RotateOutline>
               )}
             </div>
           )}

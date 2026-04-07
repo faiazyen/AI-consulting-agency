@@ -35,16 +35,56 @@
 }
 
 :root {
-  /* ── Maverick Intelligence Design System ── */
-  /* UI/UX Pro Max: avoid pure #000 for premium depth */
+  /* ── Maverick Intelligence Design System — Light Mode ── */
+  --background: #F5F5F7;
+  --foreground: #0A0A0F;
+  --card: #FFFFFF;
+  --card-foreground: #0A0A0F;
+  --popover: #FFFFFF;
+  --popover-foreground: #0A0A0F;
+
+  /* Maverick accent: bold electric indigo-blue */
+  --primary: #3B5BDB;
+  --primary-foreground: #FFFFFF;
+  --secondary: #E8E8EE;
+  --secondary-foreground: #0A0A0F;
+  --muted: #EBEBEF;
+  --muted-foreground: #6B7280;
+  --accent: #3B5BDB;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --border: rgba(0, 0, 0, 0.1);
+  --input: #E8E8EE;
+  --ring: #3B5BDB;
+  --radius: 0.75rem;
+
+  /* ── Maverick custom tokens — Light ── */
+  --mq-bg:            #F5F5F7;
+  --mq-surface:       #FFFFFF;
+  --mq-elevated:      #EBEBEF;
+  --mq-subtle:        #D8D8DF;
+  --mq-text:          #0A0A0F;
+  --mq-text-secondary:#374151;
+  --mq-text-muted:    #6B7280;
+  --mq-accent:        #3B5BDB;
+  --mq-accent-glow:   rgba(59, 91, 219, 0.25);
+  --mq-glass-light:   rgba(0, 0, 0, 0.03);
+  --mq-glass-medium:  rgba(0, 0, 0, 0.06);
+  --mq-border:        rgba(0, 0, 0, 0.1);
+  --mq-nav-bg:        rgba(245, 245, 247, 0.92);
+
+  /* UI/UX Pro Max: expo-out easing */
+  --mq-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Dark Mode ── */
+.dark {
   --background: #020203;
   --foreground: #EDEDEF;
   --card: #0a0a0c;
   --card-foreground: #EDEDEF;
   --popover: #0a0a0c;
   --popover-foreground: #EDEDEF;
-
-  /* Maverick accent: bold electric indigo-blue */
   --primary: #3B5BDB;
   --primary-foreground: #FFFFFF;
   --secondary: #16161a;
@@ -57,9 +97,7 @@
   --border: rgba(255, 255, 255, 0.08);
   --input: #16161a;
   --ring: #3B5BDB;
-  --radius: 0.75rem;
 
-  /* ── Maverick custom tokens ── */
   --mq-bg:            #020203;
   --mq-surface:       #0a0a0c;
   --mq-elevated:      #16161a;
@@ -73,9 +111,6 @@
   --mq-glass-medium:  rgba(255, 255, 255, 0.08);
   --mq-border:        rgba(255, 255, 255, 0.08);
   --mq-nav-bg:        rgba(2, 2, 3, 0.92);
-
-  /* UI/UX Pro Max: expo-out easing */
-  --mq-ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ── Base ── */

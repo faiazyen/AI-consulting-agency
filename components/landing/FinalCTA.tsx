@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { RotateCTA } from "@/components/ui/button-rotate";
 import { RevealOnScroll } from "./RevealOnScroll";
 
 const CALENDLY_URL = "https://calendly.com/maverickintelligence";
@@ -22,11 +22,14 @@ export function FinalCTA() {
               Designed to run quietly, scale effortlessly, and deliver results that
               speak for themselves.
             </p>
-            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
-              <Button className="btn-glow rounded-full bg-[var(--mq-accent)] px-10 py-4 text-base font-semibold text-white hover:bg-[var(--mq-accent)]/90">
-                Book a Consultation
-              </Button>
-            </a>
+            <RotateCTA
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-glow text-base"
+            >
+              Book a Consultation
+            </RotateCTA>
             <p className="mt-5 text-xs font-medium uppercase tracking-[0.2em] text-[var(--mq-text-muted)]">
               Maverick Intelligence — AI Built for the Bold.
             </p>

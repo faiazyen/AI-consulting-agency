@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { RotateCTA, RotateIconButton } from "@/components/ui/button-rotate";
 import { cn } from "@/lib/utils";
 
 const CALENDLY_URL = "https://calendly.com/maverickintelligence";
@@ -15,6 +16,31 @@ const navLinks = [
   { label: "Results", href: "#results" },
   { label: "Contact Us", href: "#contact" },
 ];
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Avoid hydration mismatch — only render after mount
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    return <div className="size-10" />;
+  }
+
+  return (
+    <RotateIconButton
+      aria-label="Toggle theme"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+    >
+      {theme === "dark" ? (
+        <Sun className="size-4" />
+      ) : (
+        <Moon className="size-4" />
+      )}
+    </RotateIconButton>
+  );
+}
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -57,26 +83,30 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Desktop CTA */}
-        <a
-          href={CALENDLY_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:block"
-        >
-          <Button className="btn-glow rounded-full bg-[var(--mq-accent)] px-6 text-sm font-medium text-white hover:bg-[var(--mq-accent)]/90">
+        {/* Desktop right actions */}
+        <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
+          <RotateCTA
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-glow"
+          >
             Book a Consultation
-          </Button>
-        </a>
+          </RotateCTA>
+        </div>
 
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="text-[var(--mq-text)] md:hidden"
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X className="size-6" /> : <Menu className="size-6" />}
-        </button>
+        {/* Mobile: theme toggle + hamburger */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="text-[var(--mq-text)]"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -102,16 +132,15 @@ export function Header() {
               {link.label}
             </Link>
           ))}
-          <a
+          <RotateCTA
             href={CALENDLY_URL}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMobileOpen(false)}
+            className="btn-glow mt-2 w-full justify-center"
           >
-            <Button className="btn-glow mt-2 w-full rounded-full bg-[var(--mq-accent)] text-sm font-medium text-white hover:bg-[var(--mq-accent)]/90">
-              Book a Consultation
-            </Button>
-          </a>
+            Book a Consultation
+          </RotateCTA>
         </nav>
       </div>
     </header>
