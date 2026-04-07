@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { RevealOnScroll } from "./RevealOnScroll";
 
 const faqs = [
   {
@@ -31,32 +32,32 @@ const faqs = [
 export function FAQ() {
   return (
     <section className="py-20 md:py-32">
+      <div className="section-divider mb-20 md:mb-32" />
       <div className="container mx-auto max-w-[800px] px-6">
-        {/* Header */}
-        <div className="mb-12 text-center">
+        <RevealOnScroll className="mb-12 text-center">
           <h2 className="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl">
             Everything clear. Before the first call.
           </h2>
-          <p className="text-[var(--aic-text-muted)]">
+          <p className="text-[var(--mq-text-muted)]">
             Every system starts with understanding. Here&apos;s everything worth
             knowing before we begin.
           </p>
-        </div>
+        </RevealOnScroll>
 
-        {/* Accordions */}
         <Accordion className="space-y-3">
           {faqs.map((faq, i) => (
-            <AccordionItem
-              key={i}
-              className="rounded-[20px] border-none bg-[var(--aic-card)] px-6"
-            >
-              <AccordionTrigger className="py-5 text-left text-base font-medium hover:no-underline">
-                {faq.q}
-              </AccordionTrigger>
-              <AccordionContent className="pb-5 text-sm text-[var(--aic-text-muted)]">
-                {faq.a}
-              </AccordionContent>
-            </AccordionItem>
+            <RevealOnScroll key={i} delay={i * 0.07}>
+              <AccordionItem
+                className="rounded-[20px] border-none bg-[var(--mq-surface)] px-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+              >
+                <AccordionTrigger className="py-5 text-left text-base font-medium hover:no-underline">
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent className="pb-5 text-sm text-[var(--mq-text-muted)]">
+                  {faq.a}
+                </AccordionContent>
+              </AccordionItem>
+            </RevealOnScroll>
           ))}
         </Accordion>
       </div>

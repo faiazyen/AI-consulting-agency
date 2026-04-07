@@ -35,95 +35,141 @@
 }
 
 :root {
-  /* AIC Dark Theme — always dark */
-  --background: #000000;
-  --foreground: #FFFFFF;
-  --card: #0F0F0F;
-  --card-foreground: #FFFFFF;
-  --popover: #0F0F0F;
-  --popover-foreground: #FFFFFF;
-  --primary: #F04C3D;
-  --primary-foreground: #FFFFFF;
-  --secondary: #212121;
-  --secondary-foreground: #FFFFFF;
-  --muted: #0F0F0F;
-  --muted-foreground: #969696;
-  --accent: #F04C3D;
-  --accent-foreground: #FFFFFF;
-  --destructive: #F04C3D;
-  --border: #212121;
-  --input: #212121;
-  --ring: #F04C3D;
-  --radius: 0.625rem;
+  /* ── Maverick Intelligence Design System ── */
+  /* UI/UX Pro Max: avoid pure #000 for premium depth */
+  --background: #020203;
+  --foreground: #EDEDEF;
+  --card: #0a0a0c;
+  --card-foreground: #EDEDEF;
+  --popover: #0a0a0c;
+  --popover-foreground: #EDEDEF;
 
-  /* Custom AIC tokens */
-  --aic-bg: #000000;
-  --aic-card: #0F0F0F;
-  --aic-elevated: #212121;
-  --aic-subtle: #454545;
-  --aic-text-primary: #FFFFFF;
-  --aic-text-secondary: #D1D1D1;
-  --aic-text-muted: #969696;
-  --aic-accent: #F04C3D;
-  --aic-glass-light: rgba(255, 255, 255, 0.08);
-  --aic-glass-medium: rgba(255, 255, 255, 0.10);
-  --aic-nav-bg: rgba(15, 15, 15, 0.95);
+  /* Maverick accent: bold electric indigo-blue */
+  --primary: #3B5BDB;
+  --primary-foreground: #FFFFFF;
+  --secondary: #16161a;
+  --secondary-foreground: #EDEDEF;
+  --muted: #0a0a0c;
+  --muted-foreground: #8A8F98;
+  --accent: #3B5BDB;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: #16161a;
+  --ring: #3B5BDB;
+  --radius: 0.75rem;
+
+  /* ── Maverick custom tokens ── */
+  --mq-bg:            #020203;
+  --mq-surface:       #0a0a0c;
+  --mq-elevated:      #16161a;
+  --mq-subtle:        #2a2a30;
+  --mq-text:          #EDEDEF;
+  --mq-text-secondary:#C1C5CC;
+  --mq-text-muted:    #8A8F98;
+  --mq-accent:        #3B5BDB;
+  --mq-accent-glow:   rgba(59, 91, 219, 0.35);
+  --mq-glass-light:   rgba(255, 255, 255, 0.05);
+  --mq-glass-medium:  rgba(255, 255, 255, 0.08);
+  --mq-border:        rgba(255, 255, 255, 0.08);
+  --mq-nav-bg:        rgba(2, 2, 3, 0.92);
+
+  /* UI/UX Pro Max: expo-out easing */
+  --mq-ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* ── Base ── */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+    background-color: var(--mq-bg);
+    color: var(--mq-text);
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+  }
+
+  /* UI/UX Pro Max: tighter headings need more breathing room */
+  h1, h2, h3, h4 {
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+  }
+  p {
+    line-height: 1.75;
   }
 }
 
-/* Trust logo marquee */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+/* ── Noise texture overlay (UI/UX Pro Max premium feel) ── */
+/* Applied as a pseudo-element on body so it doesn't interfere with content */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
 }
 
-.animate-marquee {
-  animation: marquee 25s linear infinite;
+/* ── Ambient glow blobs (UI/UX Pro Max cinematic dark) ── */
+.ambient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.06;
+  pointer-events: none;
 }
 
-/* Fade-in on scroll */
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-    filter: blur(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.7s ease-out forwards;
-}
-
-/* Glass card */
+/* ── Glass card ── */
 .glass-card {
-  background: var(--aic-glass-light);
+  background: var(--mq-glass-light);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--mq-border);
 }
 
-/* Glass button */
 .glass-button {
-  background: var(--aic-glass-medium);
+  background: var(--mq-glass-medium);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+}
+
+/* ── Primary CTA button glow (UI/UX Pro Max) ── */
+.btn-glow {
+  box-shadow: 0 0 0 0 var(--mq-accent-glow);
+  transition: box-shadow 0.3s var(--mq-ease), transform 0.2s var(--mq-ease);
+}
+.btn-glow:hover {
+  box-shadow: 0 0 28px 4px var(--mq-accent-glow);
+  transform: translateY(-1px);
+}
+.btn-glow:active {
+  transform: translateY(0);
+  box-shadow: 0 0 12px 2px var(--mq-accent-glow);
+}
+
+/* ── Trust logo marquee ── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+}
+
+/* ── Section divider line ── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--mq-border), transparent);
+  margin: 0 auto;
+  max-width: 600px;
 }
