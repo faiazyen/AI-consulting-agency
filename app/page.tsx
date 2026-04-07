@@ -13,7 +13,8 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      {/* Hero is pulled up -72px behind the sticky header; subsequent sections need pt to compensate */}
+      <main className="pt-0">
         <Hero />
         <Frameworks />
         <Dashboard />

@@ -191,19 +191,21 @@ export function AnomalousMatterHero({
   return (
     <section
       role="banner"
-      className="relative h-screen w-full overflow-hidden bg-[#020203]"
+      /* -mt-[72px] pulls the hero up behind the sticky header so the
+         sphere truly fills 100vh from the very top of the viewport.
+         pt-[72px] prevents content from being hidden under the header. */
+      className="relative -mt-[72px] h-screen w-full overflow-hidden bg-[#020203]"
     >
-      <Suspense
-        fallback={<div className="h-full w-full bg-[#020203]" />}
-      >
+      {/* 3D canvas — fills entire section */}
+      <Suspense fallback={<div className="absolute inset-0 bg-[#020203]" />}>
         <GenerativeArtScene />
       </Suspense>
 
-      {/* Gradient overlay: fade sphere into page at bottom */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#020203] via-[#020203]/60 to-transparent" />
+      {/* Gradient: strong fade from bottom so text is always readable */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#020203] via-[#020203]/50 to-transparent" />
 
-      {/* Content — positioned at bottom per original design */}
-      <div className="relative z-20 flex h-full flex-col items-center justify-end pb-20 text-center md:pb-32">
+      {/* Content — absolutely pinned to the bottom of the section */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 flex flex-col items-center pb-16 text-center md:pb-24">
         <div className="max-w-3xl px-6 animate-fade-in-long">
           {title && (
             <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--mq-accent)]/80">
@@ -221,7 +223,6 @@ export function AnomalousMatterHero({
             </p>
           )}
 
-          {/* CTAs */}
           {(ctaPrimary || ctaSecondary) && (
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               {ctaPrimary && (
@@ -239,7 +240,11 @@ export function AnomalousMatterHero({
                   href={ctaSecondary.href}
                   className="inline-flex items-center rounded-full border border-[var(--mq-border)] px-8 py-3 text-sm font-medium text-[var(--mq-text)] transition-colors hover:bg-[var(--mq-glass-light)]"
                 >
-                  {ctaSecondary.label}
+                  {ctaSecondary.href.startsWith("http") ? (
+                    ctaSecondary.label
+                  ) : (
+                    ctaSecondary.label
+                  )}
                 </a>
               )}
             </div>
