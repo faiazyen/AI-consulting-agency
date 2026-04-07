@@ -6,6 +6,7 @@ import { Results } from "@/components/landing/Results";
 import { Process } from "@/components/landing/Process";
 import { Benefits } from "@/components/landing/Benefits";
 import { FAQ } from "@/components/landing/FAQ";
+import { BookConsultation } from "@/components/landing/BookConsultation";
 import { FinalCTA } from "@/components/landing/FinalCTA";
 import { Footer } from "@/components/landing/Footer";
 
@@ -22,6 +23,7 @@ export default function Home() {
         <Process />
         <Benefits />
         <FAQ />
+        <BookConsultation />
         <FinalCTA />
       </main>
       <Footer />
